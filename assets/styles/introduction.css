@@ -1,0 +1,53 @@
+.introduction {
+  /* margin: 0 auto;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    background-color: #1e1e1e;
+    padding: 10px;
+    text-align: center;
+    grid-column: 2 / 5;
+    grid-row: 2;
+    text-align: left;
+    line-height: 21px;
+    overflow-y: hidden;
+    min-width: 500px;
+    outline: none;
+    resize: none; */
+}
+
+.editor {
+  display: inline-flex;
+  gap: 10px;
+  font-family: monospace;
+  line-height: 21px;
+  background: #1e1e1e;
+  border-radius: 2px;
+  padding: 20px 10px;
+}
+
+textarea {
+  line-height: 21px;
+  overflow-y: hidden;
+  padding: 0;
+  border: 0;
+  background: #1e1e1e;
+  color: #fff;
+  min-width: 500px;
+  outline: none;
+  resize: none;
+}
+
+.line-numbers {
+  width: 20px;
+  text-align: right;
+}
+
+.line-numbers span {
+  counter-increment: linenumber;
+}
+
+.line-numbers span::before {
+  content: counter(linenumber);
+  display: block;
+  color: #506882;
+}

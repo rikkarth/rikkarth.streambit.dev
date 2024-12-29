@@ -1,0 +1,9 @@
+.description {
+  margin: 0 auto;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  background-color: #1E1E1E;
+  padding: 10px;
+  text-align: center;
+  grid-column: 2 / 5;
+}
