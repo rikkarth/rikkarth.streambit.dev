@@ -1,15 +1,31 @@
+@font-face {
+  font-family: "MesloLGMNerdFont-Regular";
+  src: url("../fonts/MesloLGMNerdFont-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Roboto Mono";
+  src: url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../fonts/JetBrainsMono-Regular.woff2");
+}
+
 :root {
   background-color: #121212;
-  font-synthesis: none;
+  /* font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale; */
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  place-items: center;
 }
 
 #app {
@@ -17,6 +33,20 @@ body {
   grid-template-columns: auto auto auto auto auto;
   grid-template-rows: auto auto auto auto auto;
   row-gap: 1rem;
-  max-width: 1280px;
-  padding: 2rem;
+  padding-top: 1%;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.description {
+  margin: 0 auto;
+  font-family: "JetBrains Mono", "Roboto Mono", "MesloLGMNerdFont-Regular",
+    monospace;
+  font-weight: 400;
+  background-color: #1e1e1e;
+  padding: 10px;
+  text-align: center;
+  grid-row: 1;
+  grid-column: 3;
+  max-height: 20%;
 }

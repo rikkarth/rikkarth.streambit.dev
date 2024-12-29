@@ -1,43 +1,34 @@
+import { marked } from "marked";
+
+import { EditorHandler } from "./editor_handler";
 import description_md from "./docs/description.md?raw";
 import introduction_md from "./docs/introduction.md?raw";
-import { marked } from "marked";
 import "../assets/styles/style.css";
-import "../assets/styles/description.css";
-import "../assets/styles/introduction.css";
 
 function main() {
-  document.querySelector("#app").innerHTML = description() + introduction();
-}
+  const app = document.querySelector("#app");
+  const editorHandler = new EditorHandler(app);
 
-function introduction() {
-  const lines = introduction_md.split("\n");
-  const spans = lines
-    .filter((line, index) => filterOutLastEmptyLine(index, lines, line))
-    .map((line) => `<span></span>`)
-    .join("");
+  app.appendChild(description());
+  app.appendChild(editorHandler.editor);
 
-  return `<div class="editor">
-          <div class="line-numbers">
-            ${spans}
-          </div>
-          <textarea class="introduction">${introduction_md}</textarea>
-          </div>
-`;
-}
+  const intro = marked.parse(introduction_md);
 
-function filterOutLastEmptyLine(index, lines, line) {
-  // filter out the last empty line in the markdown file to avoid extra line in the editor
-  return !(index === lines.length - 1 && line === "");
+  editorHandler.update(intro);
+
+  // Add resize event listener
+  window.addEventListener("resize", () => {
+    editorHandler.update(intro);
+  });
 }
 
 function description() {
   const convertedMD = marked.parse(description_md);
 
-  return `
-          <div class="description">
-            ${convertedMD}
-          </div>
-`;
+  const div = document.createElement("div");
+  div.setAttribute("class", "description");
+  div.innerHTML = convertedMD;
+  return div;
 }
 
 main();
