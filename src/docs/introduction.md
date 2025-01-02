@@ -1,17 +1,16 @@
-I'm Ricardo and I'm from Portugal.
+I'm Ricardo and I'm from Portugal 🇵🇹.
 
-<br>This website is written in JavaScript Vanilla. I've built this pannel to parse markdown to html <ins>seemlessly</ins>.
+<br>I'm passionate about computers, gaming and music, I enjoy learning, and when possible I like to contribute meaningfully to the field.
 
-I'm a Software Engineer at **Eidosmedia**.
+<br> I'm a Software Engineer at **Eidosmedia**. I'm part of the Engineering R&D AI Department, focusing on the design and development of innovative, AI-powered software solutions. 
 
-I primarily program in Java, Python Javascript and Bash.
+<br>I primarily program in Java, Python, JavaScript and Bash. I also have experience with C, C++, C#, Rust, Groovy and Lua.
 
-I'm passionate about computers, gaming and music, I enjoy learning and when possible I like to contribute meaningfully to the field. I also have experience with C, C++, C#, Rust, Groovy and Lua.
-
-[Check some of my contributions](www.something.com)
+<!-- [Check some of my contributions](www.something.com) -->
 
 <br>A summary of my academic and professional journey:
 
+* A lifelong relationship with computers and games since the dawn of 90's.
 * 6 years in the Portuguese Army
 * CTE - Electronics, Automation and Command
 * 6 years in the Electronics Field, Consumer Electronics, Industry and Digital Imaging
