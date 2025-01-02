@@ -15,10 +15,10 @@
 
 :root {
   background-color: #121212;
-  /* font-synthesis: none;
+  font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; */
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -30,23 +30,37 @@ body {
 
 #app {
   display: grid;
-  grid-template-columns: auto auto auto auto auto;
-  grid-template-rows: auto auto auto auto auto;
   row-gap: 1rem;
   padding-top: 1%;
   width: 100%;
-  min-height: 100vh;
 }
 
 .description {
   margin: 0 auto;
   font-family: "JetBrains Mono", "Roboto Mono", "MesloLGMNerdFont-Regular",
     monospace;
-  font-weight: 400;
   background-color: #1e1e1e;
   padding: 10px;
   text-align: center;
   grid-row: 1;
-  grid-column: 3;
-  max-height: 20%;
+  grid-column: 1;
+}
+
+footer {
+  font-family: "JetBrains Mono", "Roboto Mono", "MesloLGMNerdFont-Regular",
+    monospace;
+  padding: 10px;
+  text-align: right;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(14, 98, 255);
+  color: white;
+  text-align: center;
+  user-select: none;
+}
+
+#rasp {
+  color: rgb(255, 147, 58);
 }
