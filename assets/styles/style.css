@@ -37,7 +37,7 @@ body {
 
 .description {
   margin: 0 auto;
-  font-family: "JetBrains Mono", "Roboto Mono", "MesloLGMNerdFont-Regular",
+  font-family: "JetBrains Mono", "MesloLGMNerdFont-Regular",
     monospace;
   background-color: #1e1e1e;
   padding: 10px;
@@ -47,7 +47,7 @@ body {
 }
 
 footer {
-  font-family: "JetBrains Mono", "Roboto Mono", "MesloLGMNerdFont-Regular",
+  font-family: "JetBrains Mono", "MesloLGMNerdFont-Regular",
     monospace;
   padding: 10px;
   text-align: right;
