@@ -45,7 +45,6 @@ export class EditorHandler {
     this.processAndRenderLines(ctx);
 
     window.addEventListener("resize", () => {
-      console.log(this.#editorLineCounter);
       this.#editorLineCounter = 1;
       this.#lineNumbersEl.innerHTML = "";
 
@@ -80,8 +79,6 @@ export class EditorHandler {
 
   #measureAndRenderLineNums(node, ctx, maxWidth) {
     const line = node.innerHTML;
-    console.log(line);
-    console.log(`${this.lineCount} : ${ctx.measureText(line).width} : ${line}`);
 
     if (node.nodeName.match(/H[1-6]/)) {
       const shiftDiv = document.createElement("div");
@@ -92,7 +89,6 @@ export class EditorHandler {
     this.#renderLineNumber();
 
     const words = line.split(/(<[^>]+>| )/); // split by html tags and spaces
-    console.log(words);
 
     if (node.nodeName.match(/H[1-6]/)) {
       const shiftDiv = document.createElement("div");
