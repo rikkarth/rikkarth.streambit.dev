@@ -1,14 +1,4 @@
 @font-face {
-  font-family: "MesloLGMNerdFont-Regular";
-  src: url("../fonts/MesloLGMNerdFont-Regular.ttf");
-}
-
-@font-face {
-  font-family: "Roboto Mono";
-  src: url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
-}
-
-@font-face {
   font-family: "JetBrains Mono";
   src: url("../fonts/JetBrainsMono-Regular.woff2");
 }
@@ -21,7 +11,12 @@ li::marker {
   list-style-position: inside;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 25px auto;
 }
 
@@ -29,8 +24,7 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
   display: flex;
   gap: 10px;
-  font-family: "JetBrains Mono", "MesloLGMNerdFont-Regular",
-    monospace;
+  font-family: "JetBrains Mono", monospace;
   font-size: 16px;
   background: #1e1e1e;
   border-radius: 2px;
@@ -40,7 +34,6 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 25px;
   max-width: 85%;
   margin: 0 auto;
-
 }
 
 .text-area {
