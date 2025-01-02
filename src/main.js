@@ -15,11 +15,6 @@ function main() {
   const intro = marked.parse(introduction_md);
 
   editorHandler.update(intro);
-
-  // Add resize event listener
-  window.addEventListener("resize", () => {
-    editorHandler.update(intro);
-  });
 }
 
 function description() {

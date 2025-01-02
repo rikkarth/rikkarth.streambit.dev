@@ -42,29 +42,70 @@ export class EditorHandler {
     const font = `${textElStyles.fontSize} ${textElStyles.fontFamily}`;
     ctx.font = font;
 
-    const maxWidth = this.#calcMaxWidth(textElStyles);
+    this.processAndRenderLines(ctx);
 
-    const lines = text.split("\n");
-    lines
-      .filter((line) => line !== "")
-      .filter((line) => !/<\/?ul>/.test(line))
-      .forEach((line) => this.#measureAndRenderLineNums(line, ctx, maxWidth));
+    window.addEventListener("resize", () => {
+      console.log(this.#editorLineCounter);
+      this.#editorLineCounter = 1;
+      this.#lineNumbersEl.innerHTML = "";
+
+      this.processAndRenderLines(ctx);
+    });
   }
 
-  #measureAndRenderLineNums(line, ctx, maxWidth) {
+  processAndRenderLines(ctx) {
+    Array.from(this.#textEl.childNodes)
+      .filter((node) => node.nodeType === Node.ELEMENT_NODE)
+      .map((node) => this.#processNode(node, ctx));
+  }
+
+  #processNode(node, ctx) {
+    const maxWidth = this.#calcMaxWidth(window.getComputedStyle(node));
+
+    // if the node is a list, process each list item
+    if (node.tagName === "UL") {
+      this.#processListElements(node, ctx, maxWidth);
+    } else {
+      this.#measureAndRenderLineNums(node, ctx, maxWidth);
+    }
+  }
+
+  #processListElements(node, ctx, maxWidth) {
+    Array.from(node.childNodes)
+      .filter((node) => node.nodeType === Node.ELEMENT_NODE)
+      .forEach((li) => {
+        this.#measureAndRenderLineNums(li, ctx, maxWidth);
+      });
+  }
+
+  #measureAndRenderLineNums(node, ctx, maxWidth) {
+    const line = node.innerHTML;
+    console.log(line);
     console.log(`${this.lineCount} : ${ctx.measureText(line).width} : ${line}`);
 
-    // add one line number for each line
-    const lineNumDiv = document.createElement("div");
-    lineNumDiv.innerHTML = this.lineCount;
-    this.#incrementEditorLineCounter();
-    this.#lineNumbersEl.appendChild(lineNumDiv);
+    if (node.nodeName.match(/H[1-6]/)) {
+      const shiftDiv = document.createElement("div");
+      shiftDiv.innerHTML = "&nbsp;";
+      this.#lineNumbersEl.appendChild(shiftDiv);
+    }
+
+    this.#renderLineNumber();
 
     const words = line.split(/(<[^>]+>| )/); // split by html tags and spaces
+    console.log(words);
+
+    if (node.nodeName.match(/H[1-6]/)) {
+      const shiftDiv = document.createElement("div");
+      shiftDiv.innerHTML = "&nbsp;";
+      this.#lineNumbersEl.appendChild(shiftDiv);
+    }
 
     let accumulator = 0;
     words.forEach((word) => {
       this.#parseBrTags(word);
+
+      // don't measure if it is html tag
+      if (/<[^>]+>/.test(word)) return;
 
       const wordWidth = ctx.measureText(word).width;
 
@@ -78,6 +119,13 @@ export class EditorHandler {
         accumulator += wordWidth;
       }
     });
+  }
+
+  #renderLineNumber() {
+    const lineNumDiv = document.createElement("div");
+    lineNumDiv.innerHTML = this.lineCount;
+    this.#incrementEditorLineCounter();
+    this.#lineNumbersEl.appendChild(lineNumDiv);
   }
 
   /**
@@ -103,7 +151,6 @@ export class EditorHandler {
 
   #parseBrTags(word) {
     if (word.includes("<br>")) {
-      console.log("br tag found");
       const el = document.createElement("div");
       el.innerHTML = this.#editorLineCounter;
       this.#incrementEditorLineCounter();

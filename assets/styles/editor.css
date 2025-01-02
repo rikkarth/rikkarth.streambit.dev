@@ -21,6 +21,10 @@ li::marker {
   list-style-position: inside;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  margin: 25px auto;
+}
+
 .editor {
   overflow: hidden;
   display: flex;
@@ -31,11 +35,12 @@ li::marker {
   background: #1e1e1e;
   border-radius: 2px;
   padding: 20px 10px;
-  grid-column: 3 / 4;
+  grid-column: 1 / 2;
   grid-row: 2;
   line-height: 25px;
-  max-width: 1500px;
-  max-height: 430px;
+  max-width: 85%;
+  margin: 0 auto;
+
 }
 
 .text-area {
