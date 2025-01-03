@@ -1,0 +1,10 @@
+.command {
+    cursor: pointer;
+}
+
+
+#terminal {
+    margin: 0 auto;
+    width: 50%;
+}
+

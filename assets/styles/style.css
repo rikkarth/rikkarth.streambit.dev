@@ -1,81 +1,81 @@
 @font-face {
-  font-family: "JetBrains Mono";
-  src: url("../fonts/JetBrainsMono-Regular.woff2");
+    font-family: "JetBrains Mono";
+    src: url("../fonts/JetBrainsMono-Regular.woff2");
 }
 
 :root {
-  background-color: #121212;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    background-color: #121212;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  margin: 0;
-  min-width: 30vh;
-  min-height: 100vh;
-  place-items: center;
+    margin: 0;
+    min-width: 30vh;
+    min-height: 100vh;
+    place-items: center;
 }
 
 #app {
-  display: grid;
-  row-gap: 1rem;
-  padding-top: 1%;
-  width: 100%;
+    display: grid;
+    row-gap: 1rem;
+    padding-top: 1%;
+    width: 100%;
 }
 
 .description {
-  margin: 0 auto;
-  font-family: "JetBrains Mono", monospace;
-  background-color: #1e1e1e;
-  padding: 1%;
-  text-align: center;
-  grid-row: 1;
-  grid-column: 1;
+    margin: 0 auto;
+    font-family: "JetBrains Mono", monospace;
+    background-color: #1e1e1e;
+    padding: 1%;
+    text-align: center;
+    grid-row: 1;
+    grid-column: 1;
 }
 
 footer {
-  font-family: "JetBrains Mono", monospace;
-  padding: 0.5%;
-  text-align: right;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: rgb(14, 98, 255);
-  color: white;
-  text-align: center;
-  user-select: none;
+    font-family: "JetBrains Mono", monospace;
+    padding: 0.5%;
+    text-align: right;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(14, 98, 255);
+    color: white;
+    text-align: center;
+    user-select: none;
 }
 
 #rasp {
-  color: rgb(255, 147, 58);
+    color: rgb(255, 147, 58);
 }
 
 @media only screen and (max-width: 428px) {
-  #app {
-    padding-top: 0;
-  }
+    #app {
+        padding-top: 0;
+    }
 
-  .description {
-    padding: 2%;
-    margin: 0;
-  }
+    .description {
+        padding: 2%;
+        margin: 0;
+    }
 
-  footer p {
-    font-size: 12px;
-    padding-right: 15px;
-  }
+    footer p {
+        font-size: 12px;
+        padding-right: 15px;
+    }
 }
 
 @media only screen and (max-width: 360px) {
-  #app {
-    padding-top: 0;
-  }
-  
-  footer p {
-    font-size: 12px;
-    padding-right: 15px;
-  }
+    #app {
+        padding-top: 0;
+    }
+
+    footer p {
+        font-size: 12px;
+        padding-right: 15px;
+    }
 }
