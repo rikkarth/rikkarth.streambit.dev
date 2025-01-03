@@ -1,6 +1,6 @@
 I'm Ricardo and I'm from Portugal 🇵🇹.
 
-<br>I'm passionate about computers, gaming and music, I enjoy learning, and when possible I like to contribute meaningfully to the field.
+<br>I'm passionate about computers, gaming and music, I enjoy learning and I've contributed to multiple open-source projects in Java.
 
 <br> I'm a Software Engineer at **Eidosmedia**. I'm part of the Engineering R&D AI Department, focusing on the design and development of innovative, AI-powered software solutions. 
 
