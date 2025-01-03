@@ -28,7 +28,7 @@ h6 {
   font-size: 16px;
   background: #1e1e1e;
   border-radius: 2px;
-  padding: 20px 10px;
+  padding: 1.8% 1.0%;
   grid-column: 1 / 2;
   grid-row: 2;
   line-height: 25px;
@@ -42,7 +42,7 @@ h6 {
 
 .line-numbers {
   color: #6c6c6c;
-  padding-right: 10px;
+  padding-right: 1%;
   text-align: right;
   user-select: none;
 }
@@ -58,4 +58,21 @@ h6 {
 
 .text-area ul li::marker {
   color: rgb(34, 194, 159);
+}
+
+@media only screen and (max-width: 428px) {
+  .editor {
+    font-size: 14px;
+    margin-bottom: 10%;
+  }
+
+  .text-area ul li {
+    line-height: 25px;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .editor {
+    max-width: 100%;
+  }
 }

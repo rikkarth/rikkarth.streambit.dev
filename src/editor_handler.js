@@ -59,42 +59,44 @@ export class EditorHandler {
   }
 
   #processNode(node, ctx) {
-    const maxWidth = this.#calcMaxWidth(window.getComputedStyle(node));
-
     // if the node is a list, process each list item
     if (node.tagName === "UL") {
-      this.#processListElements(node, ctx, maxWidth);
+      this.#processListElements(node, ctx);
     } else {
-      this.#measureAndRenderLineNums(node, ctx, maxWidth);
+      this.#measureAndRenderLineNums(node, ctx);
     }
   }
 
-  #processListElements(node, ctx, maxWidth) {
-    Array.from(node.childNodes)
+  #processListElements(ulNode, ctx) {
+    Array.from(ulNode.childNodes)
       .filter((node) => node.nodeType === Node.ELEMENT_NODE)
       .forEach((li) => {
+        const maxWidth = this.#calcMaxWidth(window.getComputedStyle(li));
         this.#measureAndRenderLineNums(li, ctx, maxWidth);
       });
   }
 
-  #measureAndRenderLineNums(node, ctx, maxWidth) {
+  /**
+   *
+   * @param {ChildNode} node
+   * @param {CanvasRenderingContext2D} ctx
+   */
+  #measureAndRenderLineNums(node, ctx) {
+    const maxWidth = this.#calcMaxWidth(window.getComputedStyle(node));
+
     const line = node.innerHTML;
 
     if (node.nodeName.match(/H[1-6]/)) {
-      const shiftDiv = document.createElement("div");
-      shiftDiv.innerHTML = "&nbsp;";
-      this.#lineNumbersEl.appendChild(shiftDiv);
+      this.#shift();
     }
 
     this.#renderLineNumber();
 
-    const words = line.split(/(<[^>]+>| )/); // split by html tags and spaces
-
     if (node.nodeName.match(/H[1-6]/)) {
-      const shiftDiv = document.createElement("div");
-      shiftDiv.innerHTML = "&nbsp;";
-      this.#lineNumbersEl.appendChild(shiftDiv);
+      this.#shift();
     }
+
+    const words = line.split(/(<[^>]+>| )/); // split by html tags and spaces
 
     let accumulator = 0;
     words.forEach((word) => {
@@ -108,13 +110,17 @@ export class EditorHandler {
       // if the word is too long to fit on the current line
       if (accumulator + wordWidth > maxWidth) {
         accumulator = wordWidth; // start new line with the current word
-        const shiftDiv = document.createElement("div");
-        shiftDiv.innerHTML = "&nbsp;";
-        this.#lineNumbersEl.appendChild(shiftDiv);
+        this.#shift();
       } else {
         accumulator += wordWidth;
       }
     });
+  }
+
+  #shift() {
+    const shiftDiv = document.createElement("div");
+    shiftDiv.innerHTML = "&nbsp;";
+    this.#lineNumbersEl.appendChild(shiftDiv);
   }
 
   #renderLineNumber() {
@@ -130,19 +136,7 @@ export class EditorHandler {
    * @returns {number} the maximum width of the text area
    */
   #calcMaxWidth(textElStyles) {
-    const textAreaWidth = parseFloat(textElStyles.width);
-    const paddingLeft = parseFloat(textElStyles.paddingLeft);
-    const paddingRight = parseFloat(textElStyles.paddingRight);
-    const borderLeftWidth = parseFloat(textElStyles.borderLeftWidth);
-    const borderRightWidth = parseFloat(textElStyles.borderRightWidth);
-
-    return (
-      textAreaWidth -
-      paddingLeft -
-      paddingRight -
-      borderLeftWidth -
-      borderRightWidth
-    );
+    return parseFloat(textElStyles.width);
   }
 
   #parseBrTags(word) {

@@ -13,7 +13,7 @@
 
 body {
   margin: 0;
-  min-width: 320px;
+  min-width: 30vh;
   min-height: 100vh;
   place-items: center;
 }
@@ -29,7 +29,7 @@ body {
   margin: 0 auto;
   font-family: "JetBrains Mono", monospace;
   background-color: #1e1e1e;
-  padding: 10px;
+  padding: 1%;
   text-align: center;
   grid-row: 1;
   grid-column: 1;
@@ -37,7 +37,7 @@ body {
 
 footer {
   font-family: "JetBrains Mono", monospace;
-  padding: 10px;
+  padding: 0.5%;
   text-align: right;
   position: fixed;
   left: 0;
@@ -51,4 +51,31 @@ footer {
 
 #rasp {
   color: rgb(255, 147, 58);
+}
+
+@media only screen and (max-width: 428px) {
+  #app {
+    padding-top: 0;
+  }
+
+  .description {
+    padding: 2%;
+    margin: 0;
+  }
+
+  footer p {
+    font-size: 12px;
+    padding-right: 15px;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  #app {
+    padding-top: 0;
+  }
+  
+  footer p {
+    font-size: 12px;
+    padding-right: 15px;
+  }
 }
