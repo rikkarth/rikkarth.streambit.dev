@@ -1,7 +1,6 @@
 import figlet from "figlet";
 
 import { commands, prompt } from "./commands.js";
-import { directories } from "./directories.js";
 import "../assets/styles/terminal.css";
 
 /**
@@ -48,7 +47,7 @@ function renderMOTD(term) {
         term.echo(() => {
             const ascii = render("Rikkarth");
             const header = `<darkolivegreen><glow>${ascii}</glow></darkolivegreen>`;
-            const msg = `<div>\nWelcome to my Terminal Portfolio\n</div>`;
+            const msg = `<div id="welcome_msg">\nWelcome to my Terminal Portfolio\n</div><div><i>Type 'help' for additional info</i></div>`;
 
             return `${header}${msg}`;
         });

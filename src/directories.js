@@ -1,66 +1,54 @@
-export function directories() {
-    return {
-        education: [
-            '',
-            '<white>education</white>',
+export const directories = {
+    education: [
+        "",
+        "<white>education</white>",
 
-            '* <a href="https://en.wikipedia.org/wiki/Kielce_University_of_Technology">Kielce University of Technology</a> <yellow>"Computer Science"</yellow> 2002-2007 / 2011-2014',
-            '* <a href="https://pl.wikipedia.org/wiki/Szko%C5%82a_policealna">Post-secondary</a> Electronic School <yellow>"Computer Systems"</yellow> 2000-2002',
-            '* Electronic <a href="https://en.wikipedia.org/wiki/Technikum_(Polish_education)">Technikum</a> with major <yellow>"RTV"</yellow> 1995-2000',
-            ''
-        ],
-        projects: [
-            '',
-            '<white>Open Source projects</white>',
+        '* <a href="https://codeforall.com/" target="_blank">CodeForAll_</a> <yellow>"Fullstack Software Engineer and Computer Science Bootcamp"</yellow> 2022',
+        '* <a href="../assets/images/1609638883183.jpg" target="_blank">Post-secondary - IEFP</a> <yellow>"Electronics, Automation and Control"</yellow> 2015-2017',
+        "",
+    ],
+    projects: [
+        "",
+        "<white>Open Source projects</white>",
+        [
             [
-                ['jQuery Terminal',
-                    'https://terminal.jcubic.pl',
-                    'library that adds terminal interface to websites'
-                ],
-                ['LIPS Scheme',
-                    'https://lips.js.org',
-                    'Scheme implementation in JavaScript'
-                ],
-                ['Sysend.js',
-                    'https://jcu.bi/sysend',
-                    'Communication between open tabs'
-                ],
-                ['Wayne',
-                    'https://jcu.bi/wayne',
-                    'Pure in browser HTTP requests'
-                ],
-            ].map(([name, url, description = '']) => {
-                return `* <a href="${url}">${name}</a> &mdash; <white>${description}</white>`;
-            }),
-            ''
-        ].flat(),
-        skills: [
-            '',
-            '<white>languages</white>',
-
+                "FasterXML/jackson-databind - Stream Support",
+                "https://github.com/FasterXML/jackson-databind/pull/4709",
+                "This contribution aims at adding Stream Support for Java Stream API by implementing a JacksonCollector which collects JsonNode and ArrayNode into an overarching jacskon related data structure (JsonNode)",
+            ],
             [
-                'JavaScript',
-                'TypeScript',
-                'Python',
-                'SQL',
-                'PHP',
-                'Bash'
-            ].map(lang => `* <yellow>${lang}</yellow>`),
-            '',
-            '<white>libraries</white>',
+                "Apache Commons Configuration - Configuration2",
+                "https://github.com/apache/commons-configuration/commit/63435b214598bd7ed6c7b3f8f36fdc1feb7f075e",
+                "The new feature implements the ability to test if a configuration contains a value which can be leveraged for multiple validation purposes.",
+            ],
             [
-                'React.js',
-                'Redux',
-                'Jest',
-            ].map(lib => `* <green>${lib}</green>`),
-            '',
-            '<white>tools</white>',
-            [
-                'Docker',
-                'git',
-                'GNU/Linux'
-            ].map(lib => `* <blue>${lib}</blue>`),
-            ''
-        ].flat()
-    };
-}
+                "JSON-java - org.json",
+                "https://github.com/stleary/JSON-java",
+                "I contributed with strict-mode implementation, issue support and also contributed with multiple unit-tests to a 20+ year old library which is used worldwide.",
+            ],
+        ].map(([name, url, description = ""]) => {
+            return `* <a href="${url}">${name}</a> &mdash; <white>${description}</white>`;
+        }),
+        "",
+    ].flat(),
+    skills: [
+        "",
+        "<white>languages</white>",
+        [
+            "Java",
+            "Groovy",
+            "Python",
+            "JavaScript",
+            "TypeScript",
+            "Bash",
+            "SQL",
+            "C",
+            "C++",
+            "Rust",
+        ].map((lang) => `* <lightblue>${lang}</lightblue>`),
+        "",
+        "<white>tools</white>",
+        ["computers"].map((lib) => `* <lightblue>${lib}</lightblue>`),
+        "",
+    ].flat(),
+};

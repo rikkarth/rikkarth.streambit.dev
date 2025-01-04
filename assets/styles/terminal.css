@@ -2,9 +2,25 @@
     cursor: pointer;
 }
 
-
 #terminal {
+    border: 2px solid #ffffff42;
+    box-shadow: 0 0 20px 0 #00000042;
+    border-radius: 2%;
     margin: 0 auto;
-    width: 50%;
+    width: 35%;
+    min-width: 360px;
+    margin-bottom: 100px;
 }
 
+#terminal #welcome_msg {
+    color: #ffffff;
+}
+
+#terminal .cmd {
+    margin-top: 25%;
+}
+
+.directory, #dir_ls {
+    font-weight: bolder;
+    color: #07d411;
+}

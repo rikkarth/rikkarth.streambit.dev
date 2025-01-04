@@ -12,9 +12,9 @@ function main() {
 
     // prettier-ignore
     app
-    .append(description())
-    .append(editorHandler.editor)
-    .append(terminal);
+        .append(description())
+        .append(editorHandler.editor)
+        .append(terminal);
 
     const intro = marked.parse(introduction_md);
 

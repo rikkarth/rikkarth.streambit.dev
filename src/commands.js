@@ -1,6 +1,6 @@
-import { directories } from "./directories.js";
+import figlet from "figlet";
 
-const dirs = directories();
+import { directories } from "./directories.js";
 
 const root = "~";
 let cwd = root;
@@ -9,6 +9,7 @@ export function commands() {
     const result = {
         help() {
             this.echo(`Commands: ${help}`);
+            window.scrollTo(0, document.body.scrollHeight);
         },
         echo(...args) {
             if (args.length > 0) {
@@ -29,6 +30,46 @@ export function commands() {
                 this.error("Wrong directory");
             }
         },
+        motd() {
+            renderMOTD($("#terminal").terminal());
+            window.scrollTo(0, document.body.scrollHeight);
+        },
+        refresh() {
+            $("#terminal").terminal().clear();
+            renderMOTD($("#terminal").terminal());
+        },
+        ls(dir = null) {
+            if (dir) {
+                if (dir.match(/^~\/?$/)) {
+                    // ls ~ or ls ~/
+                    print_home();
+                } else if (dir.startsWith("~/")) {
+                    const path = dir.substring(2);
+                    const dirs = path.split("/");
+                    if (dirs.length > 1) {
+                        this.error("Invalid directory");
+                    } else {
+                        const dir = dirs[0];
+                        this.echo(directories[dir].join("\n"));
+                    }
+                } else if (cwd === root) {
+                    if (dir in directories) {
+                        this.echo(directories[dir].join("\n"));
+                    } else {
+                        this.error("Invalid directory");
+                    }
+                } else if (dir === "..") {
+                    print_home();
+                } else {
+                    this.error("Invalid directory");
+                }
+            } else if (cwd === root) {
+                print_home();
+            } else {
+                const dir = cwd.substring(2);
+                this.echo(directories[dir].join("\n"));
+            }
+        },
     };
 
     const help = formatHelp(result);
@@ -36,9 +77,19 @@ export function commands() {
     return result;
 }
 
-function formatHelp(commands) {
-    console.log(commands);
+function print_home() {
+    $("#terminal")
+        .terminal()
+        .echo(
+            Object.keys(directories)
+                .map((dir) => {
+                    return `<div class="directory" id="dir_ls">${dir}</div>`;
+                })
+                .join(" ")
+        );
+}
 
+function formatHelp(commands) {
     const command_list = ["clear"].concat(Object.keys(commands));
 
     const formatter = new Intl.ListFormat("en", {
@@ -82,8 +133,33 @@ function formatInputString(string, reg) {
     return string.replace(reg, formattedInput);
 }
 
+function renderMOTD(term) {
+    const font = "Slant"; // Standard is also an option
+    figlet.defaults({ fontPath: "https://unpkg.com/figlet/fonts/" });
+    figlet.loadFont([font], ready);
+
+    function ready() {
+        term.echo(() => {
+            const ascii = render("Rikkarth");
+            const header = `<darkolivegreen><glow>${ascii}</glow></darkolivegreen>`;
+            const msg = `<div id="welcome_msg">\nWelcome to my Terminal Portfolio\n</div><div><i>Type 'help' for additional info</i></div>`;
+
+            return `${header}${msg}`;
+        });
+    }
+
+    function render(text) {
+        const cols = term.cols();
+        return figlet.textSync(text, {
+            font: font,
+            width: cols,
+            whitespaceBreak: true,
+        });
+    }
+}
+
 export function prompt() {
     const user = "guest";
     const server = "streambit.dev";
-    return `<lightgreen>${user}</lightgreen><Fuchsia>@</Fuchsia><orange>${server}:</orange><aqua>${cwd}</aqua><Fuchsia>$</Fuchsia> `;
+    return `<div id="ps2"><lightgreen>${user}</lightgreen><Fuchsia>@</Fuchsia><orange>${server}:</orange><aqua>${cwd}</aqua><Fuchsia>$</Fuchsia></div> `;
 }
