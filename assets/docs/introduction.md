@@ -6,8 +6,6 @@ I'm Ricardo and I'm from Portugal 🇵🇹.
 
 <br>I primarily program in Java, Python, JavaScript and Bash. I also have experience with C, C++, C#, Rust, Groovy and Lua.
 
-<!-- [Check some of my contributions](www.something.com) -->
-
 <br>A summary of my academic and professional journey:
 
 * A lifelong relationship with computers and games since the dawn of 90's.

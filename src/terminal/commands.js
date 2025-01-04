@@ -1,5 +1,11 @@
 import figlet from "figlet";
+import Terminal from "jquery.terminal";
+import XMLFormatter from "jquery.terminal/js/xml_formatting.js";
 
+const $ = Terminal(window);
+XMLFormatter(window, $);
+
+import Slant_flf from "../../assets/fonts/Slant.flf?raw";
 import { directories } from "./directories.js";
 
 const root = "~";
@@ -82,9 +88,7 @@ function print_home() {
         .terminal()
         .echo(
             Object.keys(directories)
-                .map((dir) => {
-                    return `<div class="directory" id="dir_ls">${dir}</div>`;
-                })
+                .map((dir) => `<bold><lime>${dir}</lime></bold>`)
                 .join(" ")
         );
 }
@@ -110,22 +114,9 @@ function formatHelp(commands) {
 function highlightCommands(command_list) {
     const reg = createCommandRegex(command_list);
 
-    // Register a new formatter with the terminal
-    // The terminal library calls this function with the input string
-    $.terminal.new_formatter(function (string) {
-        // 'string' is the input provided by the terminal
+    $.terminal.defaults.formatters.push(function (string) {
         return formatInputString(string, reg);
     });
-}
-
-// format the matched command and arguments
-function formattedInput(match, command, args) {
-    return `<bold><lime>${command}</lime></bold> <white>${args}</white>`;
-}
-
-// create a regex pattern to differentiate commands from arguments
-function createCommandRegex(command_list) {
-    return new RegExp(`^\\s*(${command_list.join("|")}) (.*)`);
 }
 
 // apply the new formatter to the terminal
@@ -133,16 +124,26 @@ function formatInputString(string, reg) {
     return string.replace(reg, formattedInput);
 }
 
-function renderMOTD(term) {
-    const font = "Slant"; // Standard is also an option
-    figlet.defaults({ fontPath: "https://unpkg.com/figlet/fonts/" });
+// format the matched command and arguments
+function formattedInput(match, command, args) {
+    return `[[b;lime;]${command}] [[;white;]${args}]`;
+}
+
+// create a regex pattern to differentiate commands from arguments
+function createCommandRegex(command_list) {
+    return new RegExp(`^\\s*(${command_list.join("|")}) (.*)`);
+}
+
+export function renderMOTD(term) {
+    const font = "Slant"; // "Standard" is also an option
+    figlet.parseFont("Slant", Slant_flf);
     figlet.loadFont([font], ready);
 
     function ready() {
         term.echo(() => {
             const ascii = render("Rikkarth");
-            const header = `<darkolivegreen><glow>${ascii}</glow></darkolivegreen>`;
-            const msg = `<div id="welcome_msg">\nWelcome to my Terminal Portfolio\n</div><div><i>Type 'help' for additional info</i></div>`;
+            const header = `[[g;darkolivegreen;]${ascii}]`;
+            const msg = `[[;#ffffff;]\nWelcome to my Terminal Portfolio\n][[i;;]Type 'help' for additional info]`;
 
             return `${header}${msg}`;
         });
@@ -161,5 +162,5 @@ function renderMOTD(term) {
 export function prompt() {
     const user = "guest";
     const server = "streambit.dev";
-    return `<div id="ps2"><lightgreen>${user}</lightgreen><Fuchsia>@</Fuchsia><orange>${server}:</orange><aqua>${cwd}</aqua><Fuchsia>$</Fuchsia></div> `;
-}
+    return `<lightgreen>${user}</lightgreen><Fuchsia>@</Fuchsia><orange>${server}:</orange><aqua>${cwd}</aqua><Fuchsia>$</Fuchsia> `;
+  }

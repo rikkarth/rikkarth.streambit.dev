@@ -2,6 +2,10 @@
 
 This project is a personal portfolio website for showcasing my work, skills, and experience. It includes sections for projects, skills, experience, and contact information.
 
+Visit at: https://www.streambit.dev
+
+This website is served by a raspberry pi somewhere in the world. 🤖🌍
+
 ## Getting Started
 To get a local copy up and running, follow these simple steps.
 

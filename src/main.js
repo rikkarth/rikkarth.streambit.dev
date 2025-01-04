@@ -1,24 +1,52 @@
+import $ from "jquery";
 import { marked } from "marked";
-import { EditorHandler } from "./editor_handler";
-import { initializeTerminal } from "./terminal";
-import description_md from "./docs/description.md?raw";
-import introduction_md from "./docs/introduction.md?raw";
-import "../assets/styles/style.css";
+import { EditorHandler } from "./editor/editor_handler";
+import { initializeTerminal } from "./terminal/terminal";
+import introduction_md from "../assets/docs/introduction.md?raw";
+import "./main.css";
 
 function main() {
-    const app = $("#app");
-    const editorHandler = new EditorHandler(app);
-    const terminal = createTerminal();
+    const app = createApp();
+    const editorHandler = new EditorHandler();
+    app.append(editorHandler.editor); // editor needs to be appended to the app first
 
-    // prettier-ignore
-    app
-        .append(description())
-        .append(editorHandler.editor)
-        .append(terminal);
+    $("body")
+        .append(header())
+        .append(contacts())
+        .append(routingBtns())
+        .append(app.append(createTerminal())) // then app needs to be appended to the DOM to get the correct window.getComputedStyle values
+        .append(footer());
 
     const intro = marked.parse(introduction_md);
-
     editorHandler.update(intro);
+
+    $("#routing-buttons #about-btn").on("click", () => {
+        const child = app.children().get(0);
+
+        if (child && child.className === "editor") {
+            return;
+        }
+
+        app.empty();
+        app.append(editorHandler.editor);
+    });
+
+    $("#routing-buttons #terminal-btn").on("click", () => {
+        const child = app.children().get(0);
+
+        if (child && child.className === "terminal") {
+            return;
+        }
+
+        app.empty();
+        app.append(createTerminal());
+    });
+}
+
+function createApp() {
+    const app = $("<div></div>").attr("id", "app");
+
+    return app;
 }
 
 function createTerminal() {
@@ -29,13 +57,75 @@ function createTerminal() {
     return terminalContainer;
 }
 
-function description() {
-    const convertedMD = marked.parse(description_md);
+function header() {
+    const header = $("<header></header>");
 
-    const div = document.createElement("div");
-    div.setAttribute("class", "description");
-    div.innerHTML = convertedMD;
-    return div;
+    const span1 = $("<span></span>").append(
+        $("<strong></strong>").text("Ricardo Mendes")
+    );
+
+    const span2 = $("<span></span>").html(
+        "Software Engineer @ <strong>Eidosmedia</strong>"
+    );
+
+    header.append(span1).append(span2);
+
+    return header;
 }
 
-main();
+function contacts() {
+    const contacts = $("<div></div>").attr("id", "contacts");
+
+    const githubLink = $("<a></a>")
+        .addClass("icon")
+        .attr("href", "https://github.com/rikkarth")
+        .attr("target", "_blank")
+        .append($("<img>").attr("src", "/assets/images/github-icon.svg"));
+
+    const linkedinLink = $("<a></a>")
+        .addClass("icon")
+        .attr("href", "https://www.linkedin.com/in/ricardominamendes/")
+        .attr("target", "_blank")
+        .append($("<img>").attr("src", "/assets/images/linkedin-icon.svg"));
+
+    const emailLink = $("<a></a>")
+        .addClass("icon")
+        .attr("href", "mailto:ricardo.mendes@streambit.dev")
+        .attr("target", "_blank")
+        .append($("<img>").attr("src", "/assets/images/email-icon.svg"));
+
+    contacts.append(githubLink, linkedinLink, emailLink);
+
+    return contacts;
+}
+
+function routingBtns() {
+    const routingBtns = $("<div></div>").attr("id", "routing-buttons");
+
+    const aboutButton = $("<button></button>")
+        .attr("id", "about-btn")
+        .text("About");
+
+    const terminalButton = $("<button></button>")
+        .attr("id", "terminal-btn")
+        .text("Terminal");
+
+    routingBtns.append(aboutButton, terminalButton);
+
+    return routingBtns;
+}
+
+function footer() {
+    const footer = $("<footer></footer>");
+    const paragraph = $("<p></p>").text("Hey! I'm being served from a ");
+    const span = $("<span></span>")
+        .attr("id", "rasp")
+        .append($("<strong></strong>").attr("id", "rasp").text("Raspberry Pi"));
+
+    paragraph.append(span).append(".🙂");
+    footer.append(paragraph);
+
+    return footer;
+}
+
+$.ready(main());

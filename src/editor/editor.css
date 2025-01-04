@@ -1,0 +1,71 @@
+.editor {
+    overflow: hidden;
+    display: flex;
+    gap: 10px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 16px;
+    background: #1e1e1e;
+    border-radius: 2px;
+    padding: 1.8% 1%;
+    line-height: 25px;
+    max-width: 85%;
+    margin: 0 auto;
+}
+
+.editor p {
+    margin: 0;
+}
+
+.editor li::marker {
+    list-style-position: inside;
+}
+
+.editor h1,
+.editor h2,
+.editor h3,
+.editor h4,
+.editor h5,
+.editor h6 {
+    margin: 25px auto;
+}
+
+.editor .text-area {
+    color: #fff;
+}
+
+.editor .line-numbers {
+    color: #6c6c6c;
+    padding-right: 1%;
+    text-align: right;
+    user-select: none;
+}
+
+.editor .text-area ul {
+    margin: 0px;
+    list-style-type: square;
+}
+
+.editor .text-area ul li {
+    line-height: 24.5px;
+}
+
+.editor .text-area ul li::marker {
+    color: rgb(34, 194, 159);
+}
+
+@media only screen and (max-width: 428px) {
+    .editor {
+        font-size: 14px;
+        margin-bottom: 10%;
+    }
+
+    .editor .text-area ul li {
+        line-height: 25px;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    .editor {
+        max-width: 100%;
+    }
+}
