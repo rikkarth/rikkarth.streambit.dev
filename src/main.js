@@ -121,12 +121,14 @@ function routingBtns() {
 function footer() {
     const footer = $("<footer></footer>");
     const paragraph = $("<p></p>").text("Hey! I'm being served from a ");
+    const paragraph2 = $("<p></p>").text("This page is still in construction but I'm always eager to push! 😂");
     const span = $("<span></span>")
         .attr("id", "rasp")
         .append($("<strong></strong>").attr("id", "rasp").text("Raspberry Pi"));
 
     paragraph.append(span).append(".🙂");
-    footer.append(paragraph);
+
+    footer.append(paragraph, paragraph2);
 
     return footer;
 }
