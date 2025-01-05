@@ -48,6 +48,7 @@ a {
 #contacts .icon img {
     width: 30px;
     height: 30px;
+    transition: 0.3s;
 }
 
 #contacts .icon img:hover {
@@ -61,10 +62,19 @@ a {
     margin-top: 10px;
 }
 
-#router-panel #terminal-panel {
-    
+#routing-buttons button {
+    font-family: "JetBrains Mono", monospace;
+    background-color: #1e1e1e;
+    color: #e2e2e2;
+    border: 1px solid #e2e2e2;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
+#routing-buttons button:hover {
+    background-color: #2e2e2e;
+}
 
 footer {
     font-family: "JetBrains Mono", monospace;
