@@ -4,6 +4,9 @@ import { EditorHandler } from "./editor/editor_handler";
 import { initializeTerminal } from "./terminal/terminal";
 import introduction_md from "../assets/docs/introduction.md?raw";
 import "./main.css";
+import email_svg from "../assets/images/email-icon.svg?url";
+import github_svg from "../assets/images/github-icon.svg?url";
+import linkedin_svg from "../assets/images/linkedin-icon.svg?url";
 
 function main() {
     const app = createApp();
@@ -80,19 +83,19 @@ function contacts() {
         .addClass("icon")
         .attr("href", "https://github.com/rikkarth")
         .attr("target", "_blank")
-        .append($("<img>").attr("src", "/assets/images/github-icon.svg"));
+        .append($("<img>").attr("src", `${github_svg}`));
 
     const linkedinLink = $("<a></a>")
         .addClass("icon")
         .attr("href", "https://www.linkedin.com/in/ricardominamendes/")
         .attr("target", "_blank")
-        .append($("<img>").attr("src", "/assets/images/linkedin-icon.svg"));
+        .append($("<img>").attr("src", `${linkedin_svg}`));
 
     const emailLink = $("<a></a>")
         .addClass("icon")
         .attr("href", "mailto:ricardo.mendes@streambit.dev")
         .attr("target", "_blank")
-        .append($("<img>").attr("src", "/assets/images/email-icon.svg"));
+        .append($("<img>").attr("src", `${email_svg}`));
 
     contacts.append(githubLink, linkedinLink, emailLink);
 
