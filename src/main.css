@@ -13,8 +13,6 @@
 
 body {
     margin: 0;
-    min-width: 30vh;
-    min-height: 100vh;
     place-items: center;
     display: flex;
     flex-direction: column;
@@ -72,6 +70,10 @@ a {
 
 #routing-buttons button:hover {
     background-color: #2e2e2e;
+}
+
+#app {
+    width: 85%;
 }
 
 footer {

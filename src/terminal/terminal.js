@@ -16,6 +16,7 @@ export function initializeTerminal(container) {
     const term = container.terminal(commands(), options());
     renderMOTD(term);
     enableClickOnCommand(term);
+    return term;
 }
 
 /**
@@ -26,7 +27,7 @@ export function initializeTerminal(container) {
  *
  * @param {JQueryTerminal<HTMLElement>} term - The terminal instance on which click functionality is enabled.
  */
-function enableClickOnCommand(term) {
+export function enableClickOnCommand(term) {
     term.on("click", ".command", function () {
         const command = $(this).text();
         term.exec(command);

@@ -72,21 +72,16 @@ export class EditorHandler {
     #processListElements(ulNode, ctx) {
         Array.from(ulNode.children)
             .filter((node) => node.nodeType === Node.ELEMENT_NODE)
-            .forEach((li) => {
-                const maxWidth = this.#calcMaxWidth(
-                    window.getComputedStyle(li)
-                );
-                this.#measureAndRenderLineNums(li, ctx);
-            });
+            .forEach((li) => this.#measureAndRenderLineNums(li, ctx));
     }
 
     /**
-     *
+     * Measure the width of the text and render line numbers
      * @param {Element} node
      * @param {CanvasRenderingContext2D} ctx
      */
     #measureAndRenderLineNums(node, ctx) {
-        const maxWidth = this.#calcMaxWidth(window.getComputedStyle(node));
+        let maxWidth = this.#calcMaxWidth(window.getComputedStyle(node));
 
         const line = node.innerHTML;
 
@@ -127,8 +122,8 @@ export class EditorHandler {
     }
 
     #renderLineNumber() {
-        const lineNumDiv = document.createElement("div");
-        lineNumDiv.innerHTML = this.lineCount;
+        const lineNumDiv = $("<div></div>");
+        lineNumDiv.html(this.lineCount);
         this.#incrementEditorLineCounter();
         this.#lineNumbersEl.append(lineNumDiv);
     }

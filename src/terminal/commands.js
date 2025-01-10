@@ -27,10 +27,10 @@ export function commands() {
                 cwd = root;
             } else if (
                 dir.startsWith("~/") &&
-                Object.keys(dirs).includes(dir.substring(2))
+                Object.keys(directories).includes(dir.substring(2))
             ) {
                 cwd = dir;
-            } else if (Object.keys(dirs).includes(dir)) {
+            } else if (Object.keys(directories).includes(dir)) {
                 cwd = root + "/" + dir;
             } else {
                 this.error("Wrong directory");

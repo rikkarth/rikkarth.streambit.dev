@@ -20,3 +20,10 @@
     font-weight: bolder;
     color: #07d411;
 }
+
+@media only screen and (max-width: 1000px) {
+
+    #terminal {
+        width: 70%;
+    }
+}

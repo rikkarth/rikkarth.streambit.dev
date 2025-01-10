@@ -1,48 +1,60 @@
 import $ from "jquery";
 import { marked } from "marked";
 import { EditorHandler } from "./editor/editor_handler";
-import { initializeTerminal } from "./terminal/terminal";
+import {
+    initializeTerminal as initializedTerminal,
+    enableClickOnCommand,
+} from "./terminal/terminal";
 import introduction_md from "../assets/docs/introduction.md?raw";
 import "./main.css";
 import email_svg from "../assets/images/email-icon.svg?url";
 import github_svg from "../assets/images/github-icon.svg?url";
 import linkedin_svg from "../assets/images/linkedin-icon.svg?url";
+import { renderMOTD } from "./terminal/commands";
 
 function main() {
     const app = createApp();
-    const editorHandler = new EditorHandler();
-    app.append(editorHandler.editor); // editor needs to be appended to the app first
+    
+
+    const termContainer = $("<div><div>").attr("id", "terminal");
+    const terminal = createTerminal(termContainer);
 
     $("body")
         .append(header())
         .append(contacts())
         .append(routingBtns())
-        .append(app.append(createTerminal())) // then app needs to be appended to the DOM to get the correct window.getComputedStyle values
+        .append(app.append(terminal)) // then app needs to be appended to the DOM to get the correct window.getComputedStyle values
         .append(footer());
 
-    const intro = marked.parse(introduction_md);
-    editorHandler.update(intro);
+
 
     $("#routing-buttons #about-btn").on("click", () => {
         const child = app.children().get(0);
+
+        if (child && child.className === "terminal") {
+            app.empty();
+        }
 
         if (child && child.className === "editor") {
             return;
         }
 
-        app.empty();
+        const editorHandler = new EditorHandler();
         app.append(editorHandler.editor);
+        const intro = marked.parse(introduction_md);
+        editorHandler.update(intro);
     });
 
     $("#routing-buttons #terminal-btn").on("click", () => {
         const child = app.children().get(0);
 
-        if (child && child.className === "terminal") {
+        if (child && child.id === "terminal") {
             return;
         }
-
+        
         app.empty();
-        app.append(createTerminal());
+        termContainer.empty();
+        app.append(createTerminal(termContainer));
     });
 }
 
@@ -52,12 +64,8 @@ function createApp() {
     return app;
 }
 
-function createTerminal() {
-    const terminalContainer = $("<div><div>").attr("id", "terminal");
-
-    initializeTerminal(terminalContainer);
-
-    return terminalContainer;
+function createTerminal(container) {
+    return initializedTerminal(container);
 }
 
 function header() {
@@ -111,9 +119,9 @@ function routingBtns() {
 
     const terminalButton = $("<button></button>")
         .attr("id", "terminal-btn")
-        .text("Terminal");
+        .text("Home");
 
-    routingBtns.append(aboutButton, terminalButton);
+    routingBtns.append(terminalButton, aboutButton);
 
     return routingBtns;
 }
@@ -121,7 +129,9 @@ function routingBtns() {
 function footer() {
     const footer = $("<footer></footer>");
     const paragraph = $("<p></p>").text("Hey! I'm being served from a ");
-    const paragraph2 = $("<p></p>").text("This page is still in construction but I'm always eager to push! 😂");
+    const paragraph2 = $("<p></p>").text(
+        "This page is still in construction but I'm always eager to push! 😂"
+    );
     const span = $("<span></span>")
         .attr("id", "rasp")
         .append($("<strong></strong>").attr("id", "rasp").text("Raspberry Pi"));
